@@ -1,11 +1,4 @@
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   Radio,
   Brain,
   PiggyBank,
@@ -14,89 +7,155 @@ import {
   Heart,
 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const Features = () => {
   const { t } = useLanguage();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   const features = [
     {
-      icon: (
-        <Radio className="h-5 xs:h-6 sm:h-7 md:h-8 w-5 xs:w-6 sm:w-7 md:w-8 text-grass-600" />
-      ),
+      icon: Radio,
       title: t("features.sensorDriven.title"),
       description: t("features.sensorDriven.description"),
+      accent: "from-emerald-500/10 to-teal-500/10",
+      iconColor: "text-emerald-600",
+      border: "hover:border-emerald-200/80",
     },
     {
-      icon: (
-        <Brain className="h-5 xs:h-6 sm:h-7 md:h-8 w-5 xs:w-6 sm:w-7 md:w-8 text-grass-600" />
-      ),
+      icon: Brain,
       title: t("features.aiFertilizer.title"),
       description: t("features.aiFertilizer.description"),
+      accent: "from-teal-500/10 to-cyan-500/10",
+      iconColor: "text-teal-600",
+      border: "hover:border-teal-200/80",
     },
     {
-      icon: (
-        <PiggyBank className="h-5 xs:h-6 sm:h-7 md:h-8 w-5 xs:w-6 sm:w-7 md:w-8 text-grass-600" />
-      ),
+      icon: PiggyBank,
       title: t("features.reduceInputCost.title"),
       description: t("features.reduceInputCost.description"),
+      accent: "from-green-500/10 to-emerald-500/10",
+      iconColor: "text-green-600",
+      border: "hover:border-green-200/80",
     },
     {
-      icon: (
-        <Sprout className="h-5 xs:h-6 sm:h-7 md:h-8 w-5 xs:w-6 sm:w-7 md:w-8 text-grass-600" />
-      ),
+      icon: Sprout,
       title: t("features.cropSpecific.title"),
       description: t("features.cropSpecific.description"),
+      accent: "from-grass-500/10 to-green-500/10",
+      iconColor: "text-grass-600",
+      border: "hover:border-grass-200/80",
     },
     {
-      icon: (
-        <Smartphone className="h-5 xs:h-6 sm:h-7 md:h-8 w-5 xs:w-6 sm:w-7 md:w-8 text-grass-600" />
-      ),
+      icon: Smartphone,
       title: t("features.farmerFirst.title"),
       description: t("features.farmerFirst.description"),
+      accent: "from-slate-400/10 to-slate-500/10",
+      iconColor: "text-slate-600",
+      border: "hover:border-slate-200/80",
     },
     {
-      icon: (
-        <Heart className="h-5 xs:h-6 sm:h-7 md:h-8 w-5 xs:w-6 sm:w-7 md:w-8 text-grass-600" />
-      ),
+      icon: Heart,
       title: t("features.smallFarmers.title"),
       description: t("features.smallFarmers.description"),
+      accent: "from-rose-400/10 to-pink-400/10",
+      iconColor: "text-rose-500",
+      border: "hover:border-rose-200/80",
     },
   ];
 
   return (
     <section
       id="features"
-      className="py-8 xs:py-10 sm:py-12 md:py-16 lg:py-20 bg-white"
+      className="relative py-20 sm:py-28 lg:py-32 overflow-hidden"
     >
-      <div className="container mx-auto px-3 xs:px-4 sm:px-6">
-        <div className="text-center mb-6 xs:mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-lg xs:text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 xs:mb-3 leading-tight">
+      {/* Section background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50/50 to-white" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+
+      <div
+        ref={sectionRef}
+        className="container mx-auto px-4 sm:px-6 relative z-10"
+      >
+        {/* Section header */}
+        <div className="text-center mb-14 sm:mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="inline-block text-xs sm:text-sm font-semibold tracking-widest uppercase text-emerald-600 mb-4">
+              Why AgriCure
+            </span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 sm:mb-5 leading-tight tracking-tight"
+          >
             {t("features.title")}
-          </h2>
-          <p className="text-xs xs:text-sm sm:text-lg md:text-xl text-gray-600 max-w-sm xs:max-w-lg sm:max-w-xl md:max-w-2xl mx-auto leading-relaxed px-2 xs:px-0">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="text-base sm:text-lg lg:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed"
+          >
             {t("features.subtitle")}
-          </p>
+          </motion.p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 xs:gap-3 sm:gap-6 md:gap-8">
-          {features.map((feature, index) => (
-            <Card
-              key={index}
-              className="hover:shadow-lg transition-shadow duration-300 border-0 shadow-md h-full hover:scale-105"
-            >
-              <CardHeader className="pb-2 xs:pb-3 sm:pb-4 p-2.5 xs:p-4 sm:p-6">
-                <div className="mb-2 xs:mb-3">{feature.icon}</div>
-                <CardTitle className="text-xs xs:text-sm sm:text-lg md:text-xl text-gray-900 leading-tight">
-                  {feature.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-0 p-2.5 xs:p-4 sm:p-6">
-                <CardDescription className="text-gray-600 text-[10px] xs:text-xs sm:text-sm md:text-base leading-relaxed">
-                  {feature.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
-          ))}
+        {/* Feature cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 28 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.15 + index * 0.08,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                <div
+                  className={`group relative h-full rounded-2xl border border-slate-100/80 bg-white/70 backdrop-blur-sm p-6 sm:p-8 transition-all duration-400 hover:shadow-premium-lg hover:-translate-y-1 ${feature.border}`}
+                >
+                  {/* Subtle gradient bg on hover */}
+                  <div
+                    className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feature.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  />
+
+                  <div className="relative z-10">
+                    {/* Icon */}
+                    <div
+                      className={`inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br ${feature.accent} mb-5 sm:mb-6 transition-transform duration-300 group-hover:scale-105`}
+                    >
+                      <Icon
+                        className={`w-5 h-5 sm:w-6 sm:h-6 ${feature.iconColor}`}
+                        strokeWidth={1.8}
+                      />
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-lg sm:text-xl font-semibold text-slate-900 mb-2.5 leading-snug">
+                      {feature.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
